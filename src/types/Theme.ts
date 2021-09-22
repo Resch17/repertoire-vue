@@ -1,14 +1,14 @@
 import { Color } from './Color';
 
 export interface Theme {
-    Id: number;
-    Name: string;
-    BackgroundColorId: number;
-    SecondaryBackgroundColorId: number;
-    AccentTextColorId: number;
-    PrimaryTextColorId: number;
-    BackgroundColor: Color;
-    SecondaryBackgroundColor: Color;
-    AccentTextColor: Color;
-    PrimaryTextColor: Color;
+    id: number;
+    name: string;
+    backgroundColorId: number;
+    secondaryBackgroundColorId: number;
+    accentTextColorId: number;
+    primaryTextColorId: number;
+    backgroundColor: Color;
+    secondaryBackgroundColor: Color;
+    accentTextColor: Color;
+    primaryTextColor: Color;
 }

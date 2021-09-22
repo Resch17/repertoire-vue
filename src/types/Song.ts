@@ -5,18 +5,18 @@ import { Tuning } from './Tuning';
 import { User } from './User';
 
 export interface Song {
-    Id: number;
-    Title: string;
-    ArtistId: number;
-    GenreId: number;
-    InstrumentId: number;
-    UserId: number;
-    TuningId: number;
-    Url?: string;
-    Youtube?: string;
-    Artist: Artist;
-    Genre: Genre;
-    Instrument: Instrument;
-    User: User;
-    Tuning: Tuning;
+    id: number;
+    title: string;
+    artistId: number;
+    genreId: number;
+    instrumentId: number;
+    userId: number;
+    tuningId: number;
+    url?: string;
+    youtube?: string;
+    artist: Artist;
+    genre: Genre;
+    instrument: Instrument;
+    user: User;
+    tuning: Tuning;
 }

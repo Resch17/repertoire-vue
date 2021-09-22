@@ -1,6 +1,6 @@
 export interface User {
-	Id: number;
-	Username: string;
-	Email: string;
-	ThemeId: number;
+	id?: number;
+	username: string;
+	email: string;
+	themeId: number;
 }

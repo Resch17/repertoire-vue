@@ -1,5 +1,5 @@
 export interface Tone {
-    Id: number;
-    Note: string;
-    Path: string;
+    id: number;
+    note: string;
+    path: string;
 }

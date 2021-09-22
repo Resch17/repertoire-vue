@@ -1,4 +1,4 @@
 export interface Color {
-    Id: number;
-    Hex: string;
+    id: number;
+    hex: string;
 }
