@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from './userService';
 
 export const apiClient = axios.create({
     baseURL: 'https://localhost:5001/api',
@@ -17,7 +18,10 @@ export async function getAll<T>(
         if (queryString) {
             url += queryString;
         }
-        const response = await apiClient.get(url);
+        const token = await getToken();
+        const response = await apiClient.get(url, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         set = response.data;
         return set;
     } catch (err) {
@@ -27,15 +31,19 @@ export async function getAll<T>(
 
 export async function getMultipleById<T>(
     baseUrl: string,
-    resourceId: number,
+    resourceId: number | string,
     routeParam?: string
 ): Promise<T[]> {
     try {
         let set = new Array<T>();
+        const token = await getToken();
         const response = await apiClient.get(
             routeParam
                 ? `${baseUrl}/${routeParam}/${resourceId}`
-                : `${baseUrl}/${resourceId}`
+                : `${baseUrl}/${resourceId}`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
         );
         set = response.data;
         return set;
@@ -46,15 +54,19 @@ export async function getMultipleById<T>(
 
 export async function getOneById<T>(
     baseUrl: string,
-    resourceId: number,
+    resourceId: number | string,
     routeParam?: string
 ): Promise<T> {
     try {
         let item;
+        const token = await getToken();
         const response = await apiClient.get(
             routeParam
                 ? `${baseUrl}/${routeParam}/${resourceId}`
-                : `${baseUrl}/${resourceId}`
+                : `${baseUrl}/${resourceId}`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
         );
         item = response.data;
         return item;
@@ -65,7 +77,10 @@ export async function getOneById<T>(
 
 export async function addResource<T>(baseUrl: string, resource: T) {
     try {
-        const response = await apiClient.post(baseUrl, resource);
+        const token = await getToken();
+        const response = await apiClient.post(baseUrl, resource, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         return response.data;
     } catch (err) {
         throw err;
@@ -75,12 +90,16 @@ export async function addResource<T>(baseUrl: string, resource: T) {
 export async function updateResource<T>(
     baseUrl: string,
     resource: T,
-    resourceId?: number
+    resourceId?: number | string
 ) {
     try {
+        const token = await getToken();
         const response = await apiClient.put(
             resourceId ? `${baseUrl}/${resourceId}` : baseUrl,
-            resource
+            resource,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
         );
         return response.data;
     } catch (err) {

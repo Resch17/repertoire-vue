@@ -1,6 +1,9 @@
 <template>
     <h1>Hello World!</h1>
-    <button @click="addNewUser">Click me!</button>
+    <button @click="getSongs">Click me!</button>
+    <button @click="showUser">Display User Info</button>
+    <button @click="$router.push('/login')">Login Page</button>
+    <button @click="logOut">Log Out</button>
 </template>
 
 <script lang="ts">
@@ -21,7 +24,7 @@ import {
 import { getNotes } from '../services/noteService';
 import { getAllThemes } from '../services/themeService';
 import { getAllTunings, getTuningById } from '../services/tuningService';
-import { getUserById, addUser } from '../services/userService';
+import { getUserById, addUser, logout } from '../services/userService';
 import { Artist } from '@/types/Artist';
 export default defineComponent({
     data() {
@@ -35,42 +38,40 @@ export default defineComponent({
         };
     },
     async created() {
-        const apiSongs = await getAllSongs();
-        this.songs = apiSongs;
-        console.log(this.songs);
-
-        const apiArtists = await getAllArtists();
-        this.artists = apiArtists;
-        console.log(this.artists);
-
-        const apiArtist = await getArtistById(9);
-        console.log(apiArtist);
-
-        const apiGenres = await getAllGenres();
-        console.log(apiGenres);
-
-        const apiNotes = await getNotes(1, 1);
-        console.log(apiNotes);
-
-        const songsByUser = await getSongsByUser(1);
-        console.log('user 1 songs', songsByUser);
-
-        const songById = await getSongById(4);
-        console.log('song id 4', songById);
-
-        const apiThemes = await getAllThemes();
-        console.log('themes', apiThemes);
-
-        const apiTunings = await getAllTunings();
-        console.log('tunings', apiTunings);
-
-        const tuningById = await getTuningById(1);
-        console.log('tuning by id', tuningById);
-
-        const userById = await getUserById(1);
-        console.log('user by id', userById);
+        // const apiSongs = await getAllSongs();
+        // this.songs = apiSongs;
+        // console.log(this.songs);
+        // const apiArtists = await getAllArtists();
+        // this.artists = apiArtists;
+        // console.log(this.artists);
+        // const apiArtist = await getArtistById(9);
+        // console.log(apiArtist);
+        // const apiGenres = await getAllGenres();
+        // console.log(apiGenres);
+        // const apiNotes = await getNotes(1, 1);
+        // console.log(apiNotes);
+        // const songsByUser = await getSongsByUser(1);
+        // console.log('user 1 songs', songsByUser);
+        // const songById = await getSongById(4);
+        // console.log('song id 4', songById);
+        // const apiThemes = await getAllThemes();
+        // console.log('themes', apiThemes);
+        // const apiTunings = await getAllTunings();
+        // console.log('tunings', apiTunings);
+        // const tuningById = await getTuningById(1);
+        // console.log('tuning by id', tuningById);
+        // const userById = await getUserById(1);
+        // console.log('user by id', userById);
     },
     methods: {
+        showUser() {
+            const currentUser = this.$store.getters.getCurrentUser;
+            console.log(currentUser);
+        },
+        logOut() {
+            logout();
+            this.$router.replace('/start');
+        },
         async addNewArtist() {
             const addedArtist = await addArtist({
                 name: this.artistToAdd.name,
@@ -90,6 +91,10 @@ export default defineComponent({
                 themeId: 3,
             });
             console.log('addedUser', addedUser);
+        },
+        async getSongs() {
+            const songs = await getAllSongs();
+            console.log(songs);
         },
     },
 });
