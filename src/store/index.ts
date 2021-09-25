@@ -5,6 +5,7 @@ export default createStore({
         currentUser: null,
         isLoggedIn: false,
         token: '',
+        globalLoading: false,
     },
     mutations: {
         setCurrentUser(state, newValue) {
@@ -12,6 +13,9 @@ export default createStore({
         },
         setIsLoggedIn(state, newValue) {
             state.isLoggedIn = newValue;
+        },
+        setGlobalLoading(state, newValue) {
+            state.globalLoading = newValue;
         },
     },
     actions: {
@@ -21,6 +25,9 @@ export default createStore({
         setIsLoggedIn({ commit }, newValue: boolean) {
             commit('setIsLoggedIn', newValue);
         },
+        setGlobalLoading({ commit }, newValue: boolean) {
+            commit('setGlobalLoading', newValue);
+        },
     },
     getters: {
         getCurrentUser(state) {
@@ -28,6 +35,9 @@ export default createStore({
         },
         isLoggedIn(state) {
             return state.isLoggedIn;
+        },
+        globalLoading(state) {
+            return state.globalLoading;
         },
     },
     modules: {},

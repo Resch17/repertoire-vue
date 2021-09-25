@@ -8,7 +8,8 @@ declare module '@vue/runtime-core' {
     interface State {
         currentUser: User | null;
         isLoggedIn: boolean;
-        token: string
+        token: string;
+        globalLoading: boolean;
     }
 
     // provide typings for `this.$store`

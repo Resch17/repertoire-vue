@@ -34,6 +34,7 @@ export async function login(email: string, pw: string) {
     const user: User = await getUserFirebase(firebaseId);
     store.dispatch('setCurrentUser', user);
     store.dispatch('setIsLoggedIn', true);
+    return;
 }
 
 export async function register(email: string, username: string, pw: string) {

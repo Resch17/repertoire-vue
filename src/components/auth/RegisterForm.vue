@@ -2,11 +2,21 @@
     <form @submit.prevent="submitForm">
         <div class="form-control">
             <label for="username">Username </label>
-            <input type="text" name="username" v-model="username.val" />
+            <input
+                autocomplete="off"
+                type="text"
+                name="username"
+                v-model="username.val"
+            />
         </div>
         <div class="form-control">
             <label for="email">Email </label>
-            <input type="email" name="email" v-model="email.val" />
+            <input
+                autocomplete="off"
+                type="email"
+                name="email"
+                v-model="email.val"
+            />
         </div>
         <div class="form-control">
             <label for="password">Password </label>
@@ -20,7 +30,7 @@
                 v-model="confirmPassword.val"
             />
         </div>
-        <button>Submit</button>
+        <base-button color="secondarybg">GO</base-button>
     </form>
 </template>
 
@@ -47,7 +57,6 @@ export default defineComponent({
                 val: '',
                 isValid: true,
             },
-            loading: false,
         };
     },
     methods: {
@@ -63,16 +72,29 @@ export default defineComponent({
                 alert('Invalid');
                 this.email.val = '';
                 this.password.val = '';
+                return;
             }
-            this.loading = true;
+            this.$store.dispatch('setGlobalLoading', true);
             await register(
                 this.email.val,
                 this.username.val,
                 this.password.val
             );
-            this.loading = false;
+            this.$store.dispatch('setGlobalLoading', false);
             this.$router.push('/');
         },
     },
 });
 </script>
+
+<style scoped>
+label {
+    color: var(--accent-text-color);
+}
+.form-control {
+    margin-bottom: 0.5rem;
+}
+button {
+    margin-top: 1rem;
+}
+</style>
