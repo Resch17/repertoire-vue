@@ -1,18 +1,15 @@
 import { createStore } from 'vuex';
+import { auth } from '../services/userService';
 
 export default createStore({
     state: {
         currentUser: null,
-        isLoggedIn: false,
         token: '',
         globalLoading: false,
     },
     mutations: {
         setCurrentUser(state, newValue) {
             state.currentUser = newValue;
-        },
-        setIsLoggedIn(state, newValue) {
-            state.isLoggedIn = newValue;
         },
         setGlobalLoading(state, newValue) {
             state.globalLoading = newValue;
@@ -22,9 +19,6 @@ export default createStore({
         setCurrentUser({ commit }, newValue) {
             commit('setCurrentUser', newValue);
         },
-        setIsLoggedIn({ commit }, newValue: boolean) {
-            commit('setIsLoggedIn', newValue);
-        },
         setGlobalLoading({ commit }, newValue: boolean) {
             commit('setGlobalLoading', newValue);
         },
@@ -32,9 +26,6 @@ export default createStore({
     getters: {
         getCurrentUser(state) {
             return state.currentUser;
-        },
-        isLoggedIn(state) {
-            return state.isLoggedIn;
         },
         globalLoading(state) {
             return state.globalLoading;

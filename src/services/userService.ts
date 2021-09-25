@@ -14,7 +14,7 @@ const resourceBase = '/user';
 const firebaseConfig = config;
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+export const auth = getAuth();
 
 export async function getUserById(userId: number): Promise<User> {
     return getOneById(resourceBase, userId);
@@ -33,7 +33,6 @@ export async function login(email: string, pw: string) {
     const firebaseId = signInResponse.user.uid;
     const user: User = await getUserFirebase(firebaseId);
     store.dispatch('setCurrentUser', user);
-    store.dispatch('setIsLoggedIn', true);
     return;
 }
 
@@ -53,13 +52,11 @@ export async function register(email: string, username: string, pw: string) {
     const userId = await addUser(newUser);
     const user: User = await getUserFirebase(firebaseId);
     store.dispatch('setCurrentUser', user);
-    store.dispatch('setIsLoggedIn', true);
 }
 
 export async function logout() {
     signOut(auth);
     store.dispatch('setCurrentUser', null);
-    store.dispatch('setIsLoggedIn', false);
 }
 
 export async function getToken(): Promise<string | undefined> {

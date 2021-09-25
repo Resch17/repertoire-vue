@@ -1,8 +1,8 @@
 <template>
-    <button v-if="!link" :class="style">
+    <button v-if="!link" :class="[`${style}`]">
         <slot></slot>
     </button>
-    <router-link v-else :to="to" :class="style">
+    <router-link v-else :to="to" :class="[`${style}`]">
         <slot></slot>
     </router-link>
 </template>
@@ -24,7 +24,11 @@ export default defineComponent({
         style: {
             type: String,
             required: false,
-            default: 'secondarybg',
+        },
+    },
+    computed: {
+        classStyle() {
+            return this.style;
         },
     },
 });
@@ -40,7 +44,7 @@ a {
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     font-size: 1.5rem;
-	min-width: 6rem;
+    min-width: 6rem;
 }
 
 .primarybg {
@@ -66,5 +70,9 @@ a {
 .accenttext {
     background-color: var(--accent-text-color);
     color: var(--background-color);
+}
+.accenttext:hover {
+    background-color: var(--primary-text-color);
+    color: var(--accent-text-color);
 }
 </style>

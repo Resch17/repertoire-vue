@@ -1,16 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
-import SongList from '../components/SongList.vue';
-import Auth from '../pages/Auth.vue';
+import Songs from '../pages/Songs.vue';
+import AuthPage from '../pages/AuthPage.vue';
+import { auth } from '@/services/userService';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        component: SongList,
+        component: Songs,
+        meta: {
+            requiresAuth: true,
+        },
     },
     {
         path: '/start',
-        component: Auth,
+        component: AuthPage,
+        meta: {
+            requiresAuth: false,
+        },
     },
 ];
 
@@ -20,11 +27,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.path === '/start') {
-        next();
-        return;
-    }
-    if (!store.getters.isLoggedIn) {
+    const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
+
+    if (requiresAuth && !auth.currentUser) {
         next('/start');
     } else {
         next();

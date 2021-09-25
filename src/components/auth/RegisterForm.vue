@@ -30,7 +30,7 @@
                 v-model="confirmPassword.val"
             />
         </div>
-        <base-button color="secondarybg">GO</base-button>
+        <base-button class="secondarybg">GO</base-button>
     </form>
 </template>
 

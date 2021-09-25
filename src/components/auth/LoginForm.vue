@@ -13,7 +13,7 @@
             <label for="password">Password </label>
             <input type="password" name="password" v-model="password.val" />
         </div>
-        <base-button>GO</base-button>
+        <base-button class="secondarybg">GO</base-button>
     </form>
 </template>
 

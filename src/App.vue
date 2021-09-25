@@ -8,14 +8,21 @@
                 margin="30px"
             ></scale-loader>
         </div>
-        <router-view v-else />
+        <div v-else>
+            <top-nav v-if="getCurrentUser"></top-nav>
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapGetters } from 'vuex';
+import TopNav from './components/nav/TopNav.vue';
 export default defineComponent({
+    components: { TopNav },
     computed: {
+        ...mapGetters(['getCurrentUser']),
         globalLoading() {
             return this.$store.getters.globalLoading;
         },
@@ -35,6 +42,10 @@ export default defineComponent({
     --primary-text-color: #dbedf3;
     --accent-text-color: #f73859;
     --accent-drop-shadow: 0px 4px 4px var(--accent-text-color);
+}
+
+#mainApp {
+    max-width: 100vw;
 }
 
 * {
@@ -101,5 +112,6 @@ a {
     align-items: center;
     width: 100vw;
     margin-top: 12em;
+    transform: rotate(90deg);
 }
 </style>
