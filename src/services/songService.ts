@@ -9,7 +9,9 @@ import { Song } from '../types/Song';
 const resourceBase = '/song';
 
 export async function getAllSongs(): Promise<Song[]> {
-    return getAll<Song>(resourceBase);
+    return (await getAll<Song>(resourceBase)).sort((a, b) =>
+        a.artist.name.localeCompare(b.artist.name)
+    );
 }
 
 export async function getSongsByUser(userId: number): Promise<Song[]> {

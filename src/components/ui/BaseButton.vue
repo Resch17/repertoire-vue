@@ -69,7 +69,7 @@ a {
 }
 .accenttext {
     background-color: var(--accent-text-color);
-    color: var(--background-color);
+    color: var(--primary-text-color);
 }
 .accenttext:hover {
     background-color: var(--primary-text-color);

@@ -28,17 +28,21 @@ export default defineComponent({
 tr {
     display: table;
     width: 100%;
-	height: 65px;
-	font-size: 18px;
-	cursor: pointer;
+    height: 65px;
+    font-size: 18px;
+    cursor: pointer;
+}
+tr:hover {
+    border-top: 3px solid var(--accent-text-color);
+    border-bottom: 3px solid var(--accent-text-color);
 }
 tr:nth-child(odd) {
-	background-color: var(--secondary-background-color);
+    background-color: var(--secondary-background-color);
 }
 td {
     width: 11.11%;
 }
 i:hover {
-	text-shadow: var(--accent-drop-shadow);
+    text-shadow: var(--accent-drop-shadow);
 }
 </style>
