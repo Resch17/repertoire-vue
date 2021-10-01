@@ -2,10 +2,12 @@
     <main v-if="songsLoaded">
         <section class="song-controls">
             <div class="search">
+                <i class="fas fa-search"></i>
                 <input
                     type="text"
                     autocomplete="off"
                     v-model="searchTerms"
+                    placeholder="Search by song or artist name..."
                     @input="handleSearchChange"
                 />
             </div>
@@ -19,7 +21,9 @@
             :songs="filteredSongs"
             v-if="filteredSongs.length > 0"
         ></song-List>
-        <h3 class="empty-set-message" @click="songRefresh" v-else>No songs found!</h3>
+        <h3 class="empty-set-message" @click="songRefresh" v-else>
+            No songs found!
+        </h3>
     </main>
     <scale-loader
         class="loader"
@@ -102,5 +106,21 @@ section {
     font-size: 3em;
     color: var(--accent-text-color);
     cursor: pointer;
+}
+.search input {
+    width: 272px;
+    height: 35px;
+    border-radius: 16px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-family: var(--body-font);
+    padding-left: 1em;
+    background-color: var(--primary-text-color);
+    color: var(--background-color);
+}
+.search i {
+    font-size: 20px;
+    margin-right: 0.75em;
 }
 </style>

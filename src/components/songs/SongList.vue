@@ -10,6 +10,7 @@
                 <th class="song-list-heading">Add to Setlist</th>
                 <th class="song-list-heading">Link</th>
                 <th class="song-list-heading">YouTube</th>
+                <th class="song-list-heading">Added by</th>
             </tr>
         </thead>
         <tbody>

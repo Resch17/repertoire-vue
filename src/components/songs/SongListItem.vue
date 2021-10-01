@@ -14,6 +14,9 @@
         <td class="song-cell text-center">
             <a :href="song.youtube"><i class="fab fa-2x fa-youtube"></i></a>
         </td>
+        <td class="song-cell text-center">
+            {{song.user.username}}
+        </td>
     </tr>
 </template>
 
